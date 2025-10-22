@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wk05 Polymorphism Program Design – Eternal Quest</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      padding: 30px;
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .uml-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 100px;
+    }
+
+    .uml-box {
+      width: 300px;
+      border: 2px solid black;
+      font-family: monospace;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .uml-header {
+      text-align: center;
+      font-weight: bold;
+      padding: 10px;
+      background-color: #e0e0e0;
+    }
+
+    .uml-section {
+      border-top: 2px solid black;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .uml-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-bottom: 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 600px;
+    }
+
+    @media (max-width: 1000px) {
+      .uml-box {
+        width: 90%;
+        max-width: 300px;
+      }
+
+      svg {
+        height: 700px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h2>UML Class Diagram with Inheritance</h2>
+
+<div class="uml-wrapper">
+  <!-- Arrows via SVG -->
+  <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMin meet">
+    <!-- Inheritance: Goal → Derived Classes -->
+    <line x1="600" y1="130" x2="280" y2="250" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="600" y1="130" x2="600" y2="250" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+    <line x1="600" y1="130" x2="920" y2="250" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+    
+    <!-- Association: GoalManager → Goal -->
+    <line x1="600" y1="520" x2="600" y2="370" stroke="black" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow)" />
+
+    <!-- Arrowhead marker -->
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L0,6 L9,3 z" fill="black" />
+      </marker>
+    </defs>
+  </svg>
+
+  <!-- Base Class -->
+  <div class="uml-row">
+    <div class="uml-box" id="goal">
+      <div class="uml-header">Goal</div>
+      <div class="uml-section">
+        - _name: string<br>
+        - _description: string<br>
+        - _points: int
+      </div>
+      <div class="uml-section">
+        + RecordEvent(): int<br>
+        + IsComplete(): bool<br>
+        + GetDetails(): string<br>
+        + GetStringRepresentation(): string
+      </div>
+    </div>
+  </div>
+
+  <!-- Derived Classes -->
+  <div class="uml-row">
+    <div class="uml-box" id="simpleGoal">
+      <div class="uml-header">SimpleGoal</div>
+      <div class="uml-section">
+        - _isComplete: bool
+      </div>
+      <div class="uml-section">
+        + RecordEvent(): int<br>
+        + IsComplete(): bool<br>
+        + GetDetails(): string<br>
+        + GetStringRepresentation(): string
+      </div>
+    </div>
+
+    <div class="uml-box" id="eternalGoal">
+      <div class="uml-header">EternalGoal</div>
+      <div class="uml-section">
+        <em>No unique attributes</em>
+      </div>
+      <div class="uml-section">
+        + RecordEvent(): int<br>
+        + IsComplete(): bool<br>
+        + GetDetails(): string<br>
+        + GetStringRepresentation(): string
+      </div>
+    </div>
+
+    <div class="uml-box" id="checklistGoal">
+      <div class="uml-header">ChecklistGoal</div>
+      <div class="uml-section">
+        - _targetCount: int<br>
+        - _currentCount: int<br>
+        - _bonusPoints: int
+      </div>
+      <div class="uml-section">
+        + RecordEvent(): int<br>
+        + IsComplete(): bool<br>
+        + GetDetails(): string<br>
+        + GetStringRepresentation(): string
+      </div>
+    </div>
+  </div>
+
+  <!-- GoalManager Class -->
+  <div class="uml-row">
+    <div class="uml-box" id="goalManager">
+      <div class="uml-header">GoalManager</div>
+      <div class="uml-section">
+        - _goals: List&lt;Goal&gt;<br>
+        - _score: int
+      </div>
+      <div class="uml-section">
+        + AddGoal(goal: Goal): void<br>
+        + RecordEvent(index: int): void<br>
+        + DisplayGoals(): void<br>
+        + SaveGoals(filename: string): void<br>
+        + LoadGoals(filename: string): void<br>
+        + DisplayScore(): void
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
